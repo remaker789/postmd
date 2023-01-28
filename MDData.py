@@ -3,19 +3,12 @@ import pandas as pd
 from pathlib import Path
 import re
 
-class AveTime:
-    def __init__(self, path=None, timestep = 1):  # timestep = 1fs
-        self.timestep = timestep
-        self.path = path
-        self.judge_path()
+class MDFile:
+    def __init__(self, path):
+        MDFile.path = path
+        MDFile.judge_path()
         
         
-    def set_path(self, path=None):
-        self.path = path
-        self.judge_path()
-    
-    
-
     def judge_path(self):
         """judge whether the path of object is accessable.
         """        
@@ -23,8 +16,8 @@ class AveTime:
             raise ValueError("path can not be empty")
         elif not Path(self.path).is_file():
             raise ValueError(f"'{self.path}' is not a file")
-        
-            
+    
+    
     def get_names(self, num_line:int)->list: 
         """get the names used in dataframe when read files
 
@@ -38,9 +31,8 @@ class AveTime:
             for i, line in enumerate(f.readlines(),1):
                 if i == num_line:
                     return re.split('\s+', line.strip())[1:]
-            
-            
-    def read_file(self,path:str, names:list=None, num_line:int = 2, **kwargs)->pd.DataFrame:
+                
+    def read_file(self, path:str, names:list=None, num_line:int = 2, **kwargs)->pd.DataFrame:
         """read file and return DataFrame. 
             There are some default setting in read files:
             - comment="#" due to the nature of LAMMPS
@@ -57,21 +49,7 @@ class AveTime:
         Returns:
             pd.DataFrame: DataFrame object read from the file.
         """        
-        names = names if names else self.get_names(num_line)
-        # if path.endswith(('xls', 'xlsx')): #产生的数据基本上不可能是excel
-        #     df = pd.read_excel(path, names =names, comment = "#", **kwargs) 
-        # else:
-        #     df = pd.read_csv(path, names =names, sep = '\s+', comment = "#", **kwargs)
-        
+        self.names = names if names else self.get_names(num_line)      
         df = pd.read_csv(path, names =names, sep = '\s+', comment = "#", **kwargs)
-        self.content = df
+        self.content = df #! 如果处理大文件，这里储存df可能会占用很大内存。
         return df
-
-
-
-# path = r"D:\OneDrive\Github\MyRepos\PostMD\data\ave_time.dat"
-
-# test = AveTime(path)
-# print(test.get_names(2))
-# df = test.read_file(path)
-# print(df.head(5))
