@@ -1,6 +1,7 @@
+import re
+
 import numpy as np
 import pandas as pd
-import re
 
 '''
 This script is to deal with the data using comput chunk/atom and fix ave/chunk.

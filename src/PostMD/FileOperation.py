@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+
 class Dir:
     def __init__(self, dir):
         self.dir = dir

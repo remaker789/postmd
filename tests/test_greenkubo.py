@@ -8,9 +8,11 @@
 '''
 
 import matplotlib.pyplot as plt
+
 raw_path=r"./data/friction.txt"
 
 from PostMD.GreenKubo import *
+
 test1=GreenKubo()
 test1.read_file(raw_path)
 test1.cal_acf(data_type="raw",col=3,nlag=2000)
