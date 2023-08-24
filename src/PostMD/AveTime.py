@@ -12,7 +12,7 @@ class AveTime(System):
     (see https://docs.lammps.org/fix_ave_time.html)
     """
 
-    def __init__(self, T=298, timestep=1, ):
+    def __init__(self, T=298, timestep=1):
         """initial the class
         Args:
             T (float, optional): temperature of system. Defaults to 298.0 [K].
@@ -21,7 +21,7 @@ class AveTime(System):
         super().__init__(T, timestep)
         self.path=None
 
-    def set_path(self, path):
+    def set_path(self, path=None):
         self.path = path
         self.judge_path()
         print(f"You are processing the file: '{self.path}'")

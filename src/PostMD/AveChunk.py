@@ -11,7 +11,7 @@ now I just right the Bin1d Class
 '''
 
 class Bin1d:
-    def __init__(self, dim:str, delta:float):
+    def __init__(self, dim:str, delta:float=None):
         """initialize the bin1s
 
         Args:
@@ -41,8 +41,8 @@ class Bin1d:
                   filepath:str, 
                   num_line_time:int=2, 
                   names:list=None, 
-                  num_line_column:int=3
-                  , **kwargs)->pd.DataFrame:
+                  num_line_column:int=3,
+                  **kwargs)->pd.DataFrame:
         """read file and return DataFrame. 
             There are some default setting in read files:
             - comment="#" due to the nature of LAMMPS
@@ -56,21 +56,30 @@ class Bin1d:
             num_line_time (int, optional): "# Timestep Number-of-chunks Total-count" For bin/1d. Default=2
             num_line_column (int, optional): when names=None, the content in line=num_line
                                       will be used as the column names. Defaults to 3.
-
-        Returns:
-            pd.DataFrame: DataFrame object read from the file.
         """
-        time_line = self.get_names(num_line_time)       
-        names = names if names else self.get_names(num_line_column) 
+        self.content = list([])
+        self.filepath = filepath
+        time_line = self.get_names(num_line_time)   # Timestep Number-of-chunks Total-count
+        names = names if names else self.get_names(num_line_column)  # Chunk Coord1 Ncount
+        chunknum = int(self.get_names(num_line_column+1)[0])
+        with pd.read_csv(self.filepath, comment="#", sep='\s+', header=None, names=names, chunksize=chunknum+1, **kwargs) as reader:    
+            for i, chunk in enumerate(reader):
+                self.content.append({}) # set i-th index as dict
+                self.content[i]["step"] = int(chunk.iloc[0,0])       # Timestep
+                self.content[i]["nchunk"] = int(chunk.iloc[0,1])         # Number-of-chunks
+                self.content[i]["total_count"] = chunk.iloc[0,2]    # Total-count
+                self.content[i]["data"] = chunk.iloc[1:].reset_index(drop=True)
+                
+ 
+    
+    ## apply func to self.content, #todo
+    def apply_function(self, func):
+        pass
+        
+    
+    
 
-        df = pd.read_csv(filepath, names =names, sep = '\s+', comment = "#", **kwargs)
-        return df   
-    
-    
-    # chunk data的文件总体结构为：不同时间段内进行的统计，分为一个个block，因此我们将block的数目设置为len.
-    def __len__(self):
-    # 将总共进行了多少次chunk统计设置为len()    
-        pass
-    def __getitem__(self):
-        # 索引第n次的chunk结果
-        pass
+    def __len__(self): 
+        return len(self.content)
+    def __getitem__(self, i):
+        return self.content[i]
