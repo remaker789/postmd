@@ -8,3 +8,9 @@ Now it contains the following parts:
 - FileOperation.py
 - MDData.py
 - utils.py
+
+## Install
+You can install this package using pip.
+```shell
+pip install PostMD
+```
