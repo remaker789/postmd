@@ -8,65 +8,79 @@
 '''
 
 import matplotlib.pyplot as plt
+import os
+import scipy.constants as C
+os.chdir(os.path.dirname(__file__))
 
-raw_path=r"./data/friction.txt"
+from PostMDtest.GreenKubo import *
 
-from PostMD.GreenKubo import *
+e=C.e
 
-test1=GreenKubo()
-test1.read_file(raw_path)
-test1.cal_acf(data_type="raw",col=3,nlag=2000)
-plt.plot(test1.nlag, test1.acf,label="from raw data")
-
-ave_path=r"./data/friction_acf_overwriting.txt"
-test2=GreenKubo()
-test2.read_file(ave_path,name_line=3,skiprows=4)
-test2.cal_acf(data_type='acf',col=5)
-plt.plot(test2.nlag,test2.acf, label="from fix ave/correlate")
-
-plt.xlabel("nlag")
-plt.ylabel("acf")
-plt.legend()
+# the acf data, included two forms: 
+# one is the raw data of friction force at each step of CNT, in file "friction.txt"
+# another is the autocorrelated data of friction force by 'fix ave/correlate', in file "friction_acf_overwriting.txt"
+raw_data_path=r"./data/friction.txt"
+acf_data_path=r"./data/friction_acf_overwriting.txt"
 
 
-## ---------- integrate acf ------------
-plt.figure()
 
-test1.integrate_acf()
-plt.plot(test1.nlag, test1.int_acf, label="simpson method from raw data")
 
-test1.integrate_acf(method="trap")
-plt.plot(test1.nlag, test1.int_acf, label="trap method from raw data")
-
-test2.integrate_acf()
-plt.plot(test2.nlag, test2.int_acf, label="simpson method from fix ave/correalte")
-
-test2.integrate_acf(method="trap")
-plt.plot(test2.nlag, test2.int_acf, label="trap method from fix ave/correalte")
-
-plt.xlabel("nlag")
-plt.ylabel("integration of acf")
-plt.legend()
-plt.show()
-
-## the acf in my work
-path_mywork=r"./data/friction_acf_overwriting_mywork.txt"
+## ================ For raw data ===================
+unit_trans = e/1e-10  # friction force的单位是eV/Ang
 mywork=GreenKubo()
-mywork.read_file(path=path_mywork, name_line=3, skiprows=4)
-mywork.cal_acf(data_type="acf",col=5,nlag_col=1)
+mywork.read_file(path=raw_data_path, name_line=2)
+mywork.cal_acf(data_type="raw",col=3,nlag=2000,unit_trans=unit_trans)
 plt.figure()
 plt.plot(mywork.nlag,mywork.acf)
-
+plt.title("computed from raw data")
 plt.xlabel("nlag")
 plt.ylabel("acf")
 plt.legend()
 
+
+A = 2*np.pi*2.335e-10*204.48e-10
+kB = C.Boltzmann
+T = 298
 plt.figure()
 mywork.integrate_acf(method="simpson")
-plt.plot(mywork.nlag, mywork.int_acf, label="simpson method")
+plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="simpson method")
 mywork.integrate_acf(method="trap")
-plt.plot(mywork.nlag, mywork.int_acf, label="trap method")
+plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="trap method")
 plt.xlabel("nlag")
 plt.ylabel("integration of acf")
+plt.title("computed from raw data")
+plt.legend()
+
+
+
+
+## ================ For autocorrelation data ==================
+unit_trans = e/1e-10  # friction force的单位是eV/Ang
+mywork=GreenKubo()
+mywork.read_file(path=acf_data_path, name_line=3, skiprows=4)
+mywork.cal_acf(data_type="acf",col=5,nlag_col=1,unit_trans=unit_trans)
+plt.figure()
+plt.plot(mywork.nlag,mywork.acf)
+plt.title("computed from acf data")
+plt.xlabel("nlag")
+plt.ylabel("acf")
+plt.legend()
+
+
+A = 2*np.pi*2.335e-10*204.48e-10
+kB = C.Boltzmann
+T = 298
+plt.figure()
+mywork.integrate_acf(method="simpson")
+plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="simpson method")
+mywork.integrate_acf(method="trap")
+plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="trap method")
+plt.xlabel("nlag")
+plt.ylabel("integration of acf")
+plt.title("computed from acf data")
 plt.legend()
 plt.show()
+
+
+# You will find the output is same for both acf and raw data, because these two files are generated from the same MD simulation.
+# This means you can use "fix ave/correlate" to process acf on the fly, or calculate acf by post-processing the raw data.
