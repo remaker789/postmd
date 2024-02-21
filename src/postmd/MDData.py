@@ -37,15 +37,17 @@ class MDFile:
     def read_file(self, path:str, names:list=None, num_line:int = 2, **kwargs)->pd.DataFrame:
         """read file and return DataFrame. 
             There are some default setting in read files:
-            - comment="#" due to the nature of LAMMPS
-            - sep="\s+" to match all space between data
-            - **kwargs received parameters of read_csv and read_excel, depending on cases. 
 
+            - ``comment="#"`` due to the nature of LAMMPS
+            - ``sep="\s+"`` to match all space between data
+            - ``**kwargs`` received parameters of read_csv and read_excel, depending on cases
+
+            
         Args:
             path (str): path to the file
             names (list, optional): list of columns names of data. 
                                     Defaults to None, meaning using the content in num_line of file.
-            num_line (int, optional): when names=None, the content in line=num_line
+            num_line (int, optional): when names=None, the content in line=num_line 
                                       will be used as the column names. Defaults to 2.
 
         Returns:

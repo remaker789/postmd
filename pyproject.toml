@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "PostMDtest"
+name = "postmd-dev"
 authors = [
   { name = "sszhang", email = "zhangshusong789@gmail.com" },
 ]
 description = "A simple package for post-processing of data from LAMMPS"
 readme = "README.md"
-license = {text = "MIT"}
-version = "0.0.3"
+license = {text = "MIT License"}
+version = "0.1.0"
 
 requires-python = ">=3.7"
 dependencies = [
@@ -27,3 +27,12 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.urls]
+Repository = "https://github.com/remaker789/PostMD.git"
+
+# [tool.setuptools.packages]
+# find = {}  # Scanning implicit namespaces is active by default
+
+# [tool.setuptools.packages.find]
+# where = ["src"]
+# namespaces = false

@@ -8,8 +8,10 @@
 '''
 
 import os
-from PostMD.AveChunk import *
 os.chdir(os.path.dirname(__file__))
+
+from postmd.avechunk import Bin1d
+
 
 filepath = r"data/ave_chunk_bin1d.dat"
 

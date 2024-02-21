@@ -9,7 +9,7 @@
 import os
 import sys
 
-sys.path.insert(0,os.path.abspath("../src/PostMDtest"))
+sys.path.insert(0,os.path.abspath(".."))  # must be .., ".." dir is D:\OneDrive\Github\MyRepos\PostMD
 
 
 
@@ -26,6 +26,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon", # Google style docstring
 ]
 
 templates_path = ['_templates']
@@ -38,3 +39,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+
+# If true, the current module name will be prepended to all description
+# unit titles (such as .. function::).
+add_module_names = False

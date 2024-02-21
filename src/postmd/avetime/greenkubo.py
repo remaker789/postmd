@@ -2,7 +2,7 @@ import numpy as np
 import statsmodels.api as sm
 from scipy.integrate import simpson, trapezoid
 
-from .AveTime import *
+from .avetime import AveTime
 
 
 # 一般来说GreenKubo是对平衡态下某些参数的自相关函数进行时间上的积分。

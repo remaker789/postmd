@@ -6,13 +6,13 @@
 @File    :   test_greenkubo.py
 @Time    :   2023/04/27 15:34:34
 '''
-
+import numpy as np
 import matplotlib.pyplot as plt
 import os
 import scipy.constants as C
 os.chdir(os.path.dirname(__file__))
 
-from PostMDtest.GreenKubo import *
+from postmd.avetime import GreenKubo
 
 e=C.e
 
@@ -38,7 +38,7 @@ plt.ylabel("acf")
 plt.legend()
 
 
-A = 2*np.pi*2.335e-10*204.48e-10
+A = 2*np.pi*2.335e-10*200e-10
 kB = C.Boltzmann
 T = 298
 plt.figure()
@@ -67,7 +67,7 @@ plt.ylabel("acf")
 plt.legend()
 
 
-A = 2*np.pi*2.335e-10*204.48e-10
+A = 2*np.pi*2.335e-10*200e-10
 kB = C.Boltzmann
 T = 298
 plt.figure()
@@ -75,6 +75,7 @@ mywork.integrate_acf(method="simpson")
 plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="simpson method")
 mywork.integrate_acf(method="trap")
 plt.plot(mywork.nlag, mywork.int_acf/(A*kB*T), label="trap method")
+# print( (mywork.int_acf/(A*kB*T)).max())
 plt.xlabel("nlag")
 plt.ylabel("integration of acf")
 plt.title("computed from acf data")
