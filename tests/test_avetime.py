@@ -6,8 +6,10 @@
 @File    :   tset.py
 @Time    :   2023/04/27 15:16:21
 '''
+import os 
+os.chdir(os.path.dirname(__file__))
 
-from PostMD.AveTime import *
+from postmd.avetime import AveTime
 
 test = AveTime()
 test.set_path(r"./data/ave_time.dat")

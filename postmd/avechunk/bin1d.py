@@ -43,11 +43,13 @@ class Bin1d:
                   names:list=None, 
                   num_line_column:int=3,
                   **kwargs)->pd.DataFrame:
-        """read file and return DataFrame. 
+        """read file and return DataFrame
+        
             There are some default setting in read files:
-            - comment="#" due to the nature of LAMMPS
-            - sep="\s+" to match all space between data
-            - **kwargs received parameters of read_csv and read_excel, depending on cases. 
+
+            - ``comment="#"`` due to the nature of LAMMPS
+            - ``sep="\s+"`` to match all space between data
+            - ``**kwargs`` received parameters of read_csv and read_excel, depending on cases
 
         Args:
             filepath (str): path to the file

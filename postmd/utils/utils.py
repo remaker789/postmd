@@ -1,5 +1,6 @@
 import os
 import shutil
+from pathlib import Path
 import numpy as np
 import scipy.constants as C
 import scipy
@@ -74,3 +75,19 @@ def stat_bin(x,y, bins=10,range=None):
     y_mean, _, _ = scipy.stats.binned_statistic(x, y, statistic='mean', bins=bins, range=range)
     y_std, _, _ = scipy.stats.binned_statistic(x, y, statistic='std', bins=bins, range=range)
     return x_mean, x_std, y_mean, y_std
+
+
+def judge_file(path):
+    """judge whether the path of object is accessable.
+    """
+    path = os.path.abspath(path)
+    if not Path(path).is_file():
+        raise ValueError(f"'{path}' is not a file!")  
+    
+
+def judge_dir(path):
+    """judge whether the path of object is accessable.
+    """
+    path = os.path.abspath(path)
+    if not Path(path).is_dir():
+        raise ValueError(f"'{path}' is not a dir!") 

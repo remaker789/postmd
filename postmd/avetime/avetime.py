@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .system import *
+from ..system import System
 
 
 class AveTime(System):
@@ -50,12 +50,13 @@ class AveTime(System):
                     return re.split('\s+', line.strip())[1:] # split the line with regex '\s+' to list, and discard the first element "#"
 
     def read_file(self, path:str=None,end=None, name_line:int=2, names:list=None, **kwargs) -> pd.DataFrame:
-        """read file and return DataFrame.
+        """read file and return DataFrame
         
         There are some default setting in read files:
-        - comment="#" due to the nature of LAMMPS
-        - sep="\s+" to match all space between data
-        - **kwargs received parameters of read_csv and read_excel, depending on your cases. 
+
+        - ``comment="#"`` due to the nature of LAMMPS
+        - ``sep="\s+"`` to match all space between data
+        - ``**kwargs`` received parameters of read_csv and read_excel, depending on your cases. 
 
         Args:
             path (str): path to the file. Default to None
