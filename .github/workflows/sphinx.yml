@@ -11,11 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     # Standard drop-in approach that should work for most people.
-    - name: Build HTML
-      uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
-
+    # - name: Build HTML
+    #   uses: ammaraskar/sphinx-action@master
+    #   with:
+    #     docs-folder: "docs/"
+    - uses: actions/setup-python@v3
+    - name: Install dependencies
+      run: |
+        pip install sphinx sphinx_rtd_theme
+    - name: Sphinx build
+      run: |
+        cd docs & make html
     # Great extra actions to compose with:
     # Create an artifact of the html output.
     - name: Upload artifacts
