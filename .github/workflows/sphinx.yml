@@ -22,6 +22,7 @@ jobs:
         pip install -r requirements.txt
     - name: Sphinx build
       run: |
+        sphinx-apidoc -f -o docs .
         cd docs
         make html
     # Great extra actions to compose with:
