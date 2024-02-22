@@ -1,1 +1,4 @@
-recursive-include src *.sh
+graft postmd
+graft tests
+global-exclude __pycache__
+global-exclude *.py[co]
