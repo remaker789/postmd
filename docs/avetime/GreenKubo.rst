@@ -6,11 +6,13 @@ The Green-Kubo formula usually have the following form including an auto-correla
 .. math::
     C \int_{0}^{\infty}\left\langle p(0) \cdot p(t) \right\rangle \mathrm{d} t
 
-where :math: `C` is a prefactor parameter, :math:`\left\langle p(0) \cdot p(t) \right\rangle` is ACF of property :math:`p`.
+where :math:`C` is a prefactor parameter, :math:`\left\langle p(0) \cdot p(t) \right\rangle` is ACF of property :math:`p`.
 
-For example, the Green-Kubo formula(vscf) for calculate the diffusion coefficient is :math:`D=\frac{1}{3} \int_{0}^{\infty}\left\langle\mathbf{v}^{c}(t) \cdot \mathbf{v}^{c}(0)\right\rangle \mathrm{d} t`
+For example, the Green-Kubo formula(vscf) for calculate the diffusion coefficient is
+.. math::
+    D=\frac{1}{3} \int_{0}^{\infty}\left\langle\mathbf{v}^{c}(t) \cdot \mathbf{v}^{c}(0)\right\rangle \mathrm{d} t
 
-**The calculation of ACF is central in the Green-Kubo formula**, Here we devide Green-Kubo data into two types: ``raw`` and ``acf``:
+**The calculation of ACF is central in the Green-Kubo formula**. Here we devide Green-Kubo data into two types: ``raw`` and ``acf``:
 
 - ``raw``: just the property :math:`p`
 - ``acf``: ACF :math:`\left\langle p(0) \cdot p(t) \right\rangle`, usually generated from command ``fix ave/correlate type auto overwriting``, see `fix ave/correlate <https://docs.lammps.org/fix_ave_correlate.html>`_ command
