@@ -37,7 +37,7 @@ class GreenKubo(AveTime):
         """calculate the acf from data file.
 
         Args:
-            data_type (str, optional): the data type of self.data. Defaults to "raw".
+            data_type (str, optional): the data type of self.data (raw or acf). Defaults to "raw".
             col (int, optional): the column number(start from 0) of data to process in self.data. Defaults to None.
             nlag (int, optional): Limit the number of autocovariances returned.  Size of returned array is nlag + 1. Defaults to None.
             nlag_col (int, optional): the column number(start from 0) of nlag in data, usually named "TimeDelta". Defaults to 1.
