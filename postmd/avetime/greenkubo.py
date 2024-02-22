@@ -50,17 +50,20 @@ class GreenKubo(AveTime):
             _type_: _description_
         """
         if col is None:
-            raise ValueError("Please specify the column number of data you want to process!")    
+            raise ValueError("Please specify the column number of data you want to process!")
+        
+        # if the data are generated from "fix ave/correlate type auto overwriting"
         if data_type=="acf":
             print("Please ensure that your data are generated from 'fix ave/correlate type auto overwriting' command!")
-            # if the data are generated from "fix ave/correlate type auto overwriting"
             self.acf=np.array(self.data.iloc[:,col]*(unit_trans**2))
             self.nlag=np.array(self.data.iloc[:,nlag_col])
-            
+        
+        # if the data is just the raw data, not processed by acf
         elif data_type=="raw":
             print("Please ensure your data are generate as raw data!")
-            # if the data is just the raw data, not processed by acf
-            self.acf = sm.tsa.stattools.acovf(self.data.iloc[:,col]*unit_trans, nlag=nlag)
+            # in lammps, the data in step=0 of run is usually unstable
+            print("The script will drop out first line due to unstable data in the initial step.")
+            self.acf = sm.tsa.stattools.acovf(self.data.iloc[1:,col]*unit_trans, nlag=nlag)
             self.nlag=np.arange(0,len(self.acf))
         else:
             raise ValueError(f"the data type '{data_type}' is not supported! Please use 'acf' or 'raw' instead.")
