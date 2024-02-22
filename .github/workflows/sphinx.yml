@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/setup-python@v3
+    - name: Install dependencies
+      run: |
+        pip install sphinx_rtd_theme
     # Standard drop-in approach that should work for most people.
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
