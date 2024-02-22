@@ -4,3 +4,5 @@
 /dist/
 **/*.egg-info
 /.vscode/
+/docs/postmd*rst
+/docs/modules.rst

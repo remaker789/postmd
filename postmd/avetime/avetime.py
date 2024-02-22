@@ -15,8 +15,8 @@ class AveTime(System):
     def __init__(self, T=298, timestep=1):
         """initial the class
         Args:
-            T (float, optional): temperature of system. Defaults to 298.0 [K].
-            timestep (float, optional): temperature you set in LAMMPS input file. Defaults to 1.0 [fs].
+            T (float, optional): temperature of system. Defaults to ``298.0`` [K].
+            timestep (float, optional): temperature you set in LAMMPS input file. Defaults to ``1.0`` [fs].
         """
         super().__init__(T, timestep)
         self.path=None
@@ -38,8 +38,7 @@ class AveTime(System):
         """get the names used in dataframe when read files
         
         Args:
-            name_line (int, optional): the line number (start from 0) including 
-            the column names of data. Defaults to 2.
+            name_line (int, optional): the line number (start from ``0``) including the column names of data. Defaults to ``2``.
         
         Returns:
             list: a list of the column names of data
@@ -59,11 +58,11 @@ class AveTime(System):
         - ``**kwargs`` received parameters of read_csv and read_excel, depending on your cases. 
 
         Args:
-            path (str): path to the file. Default to None
+            path (str): path to the file. Defaults to ``None``.
             names (list, optional): list of columns names of data. 
-                                    Defaults to None, meaning using the content in name_line of file.
-            name_line (int, optional): when names=None, the content in line=name_line
-                                      will be used as the column names. Defaults to 2.
+                                    Defaults to ``None``, meaning using the content in name_line of file.
+            name_line (int, optional): when names=None, the content in ``line=<name_line>``
+                                      will be used as the column names. Defaults to ``2``.
 
         Returns:
             pd.DataFrame: DataFrame object read from the file.

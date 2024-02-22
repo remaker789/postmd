@@ -11,9 +11,6 @@ class GreenKubo(AveTime):
     for Green-Kubo formula. But you need to pay attention to the true equation of
     Green-Kubo formula, because this script just do the integration of acf, not
     including other parts, like multiply or divide by some properties.
-
-    Args:
-        AveTime: parent class that was used to process data from "fix ave/time" command 
     """    
     def __init__(self, T=298.0, timestep=1.0):
         super().__init__(T, timestep)
@@ -34,20 +31,17 @@ class GreenKubo(AveTime):
     
     
     def cal_acf(self, data_type="raw", col:int=None, nlag:int=None, nlag_col:int=1, unit_trans=1.0) -> np.ndarray:
-        """calculate the acf from data file.
+        """calculate the acf from data file and store in ``self.nlag`` and ``self.acf``.
 
         Args:
-            data_type (str, optional): the data type of self.data (raw or acf). Defaults to "raw".
-            col (int, optional): the column number(start from 0) of data to process in self.data. Defaults to None.
-            nlag (int, optional): Limit the number of autocovariances returned.  Size of returned array is nlag + 1. Defaults to None.
-            nlag_col (int, optional): the column number(start from 0) of nlag in data, usually named "TimeDelta". Defaults to 1.
-            unit_trans (float, optional): transform the unit of acf to SI unit. Defaults to 1.0
-
-        Raises:
-            ValueError: _description_
+            data_type (str, optional): the data type of self.data (raw or acf). Defaults to ``"raw"``.
+            col (int, optional): the column number(start from 0) of data to process in self.data. Defaults to ``None``.
+            nlag (int, optional): Limit the number of autocovariances returned.  Size of returned array is nlag + 1. Defaults to ``None``.
+            nlag_col (int, optional): the column number(start from ``0``) of nlag in data, usually named "TimeDelta". Defaults to ``1``.
+            unit_trans (float, optional): transform the unit of property to SI unit. Defaults to ``1.0``.
 
         Returns:
-            _type_: _description_
+            None
         """
         if col is None:
             raise ValueError("Please specify the column number of data you want to process!")
@@ -73,6 +67,13 @@ class GreenKubo(AveTime):
     
     # 这里的integrate只是用来对acf进行积分
     def integrate_acf(self, nlag=None, acf=None, *, method="simpson"):
+        """Integrate the acf data to the Green-Kubo formula and store in ``self.int_acf``.
+
+        Args:
+            nlag (np.ndarray, optional): the nlag data. Defaults to ``None``.
+            acf (np.ndarray, optional): the acf data. Defaults to ``None``.
+            method (str, optional): the integration method (``"simpson"`` or ``"trap"``). Defaults to ``"simpson"``.
+        """        
         # 我想建一个输出所有method的方法
         print(f"-------- Integrate ACF using {method} method ---------")
         acf = acf if acf else self.acf
@@ -95,7 +96,12 @@ class GreenKubo(AveTime):
             
         self.int_acf=np.array(int_acf)*self.timestep*1e-15
     
-    def write_result(self,filename):
+    def write_result(self,filename="gk.csv"):
+        """write the data of nlag, acf and integration of acf to file
+
+        Args:
+            filename (str, optional): the filename for output. Defaults to ``"gk.csv"``.
+        """               
         np.savetxt(f"acf-{filename}", np.c_[self.nlag, self.acf, self.int_acf], delimiter=',', header="nlag,acf,int_acf")
         
         
