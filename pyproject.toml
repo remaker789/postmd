@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "PostMDtest"
+name = "postmd"
 authors = [
-  { name = "sszhang", email = "zhangshusong789@gmail.com" },
+  { name = "Shusong Zhang", email = "zhangshusong789@gmail.com" },
 ]
 description = "A simple package for post-processing of data from LAMMPS"
 readme = "README.md"
