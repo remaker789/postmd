@@ -1,14 +1,15 @@
 ================
 GreenKubo
 ================
-The Green-Kubo formula usually have the following form including an auto-correlation function(ACF) of a certain property:
+The Green-Kubo formula usually have the following form including an auto-correlation function(ACF) of a certain property,
 
 .. math::
     C \int_{0}^{\infty}\left\langle p(0) \cdot p(t) \right\rangle \mathrm{d} t
 
 where :math:`C` is a prefactor parameter, :math:`\left\langle p(0) \cdot p(t) \right\rangle` is ACF of property :math:`p`.
 
-For example, the Green-Kubo formula(vscf) for calculate the diffusion coefficient is
+For example, the Green-Kubo formula(vscf) for calculate the diffusion coefficient is,
+
 .. math::
     D=\frac{1}{3} \int_{0}^{\infty}\left\langle\mathbf{v}^{c}(t) \cdot \mathbf{v}^{c}(0)\right\rangle \mathrm{d} t
 
