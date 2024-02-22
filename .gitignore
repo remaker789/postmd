@@ -3,6 +3,6 @@
 /build/
 /dist/
 **/*.egg-info
-/docs/postmd*rst
-/docs/modules.rst
+# /docs/postmd*rst
+# /docs/modules.rst
 /.vscode/

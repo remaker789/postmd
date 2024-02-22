@@ -27,9 +27,15 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon", # Google style docstring
+    "sphinx_multiversion",
 ]
 
 templates_path = ['_templates']
+html_sidebars = {
+    '**': [
+        'versioning.html',
+    ],
+}
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
