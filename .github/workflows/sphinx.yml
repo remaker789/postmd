@@ -23,7 +23,9 @@ jobs:
       run: |
         pwd
         ls -l
-        cd docs& & make html
+        cd docs
+        ls -l
+        make help
     # Great extra actions to compose with:
     # Create an artifact of the html output.
     - name: Upload artifacts
