@@ -1,6 +1,11 @@
 postmd package
 ==============
 
+.. automodule:: postmd
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -17,18 +22,7 @@ Subpackages
 Submodules
 ----------
 
-postmd.MDData module
---------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: postmd.MDData
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: postmd
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   postmd.MDData

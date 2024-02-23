@@ -7,18 +7,86 @@ import scipy
 
 NA = C.Avogadro
 
-def create_path(path, backup=False):
-    """创建路径为path的文件夹。如果文件夹已存在，则将原文件夹备份，并添加.bkXXX后缀
+def average_replicates(data_arrays):
+    """average the data from replicates.
 
     Args:
-        path (_type_): _description_
+        data_arrays (list or np.ndarray): a list of data
+
+    Returns:
+        np.ndarray: the averaged data
+
+    Examples:
+        >>> import numpy as np
+        >>> from postmd.utils import average_replicates
+        >>> data_arrays = [
+        >>>    np.array([4.3, 5.6, 3.8, 5.1, 4.9]),  # First dataset
+        >>>    np.array([3.2, 4.5, 4.1, 3.7, 4.3]),  # Second dataset
+        >>>    np.array([5.5, 6.2, 5.9, 6.1, 5.8]),   # Third dataset
+        >>>    ]
+        >>> # Calculate the average of each dataset (i.e., each array).
+        >>> average = average_replicates(data_arrays)
+        >>> print(f"Averages of replicates: {average}")
+        Averages of replicates: [4.33333333 5.43333333 4.6        4.96666667 5.        ]
     """    
+    data_arrays = np.array(data_arrays)
+    # Ensure that the input is a list of numpy arrays.
+    if data_arrays.ndim<=1:
+        raise TypeError("Input should be a list of numpy arrays.")
+
+    # Use numpy's mean function to calculate the average of each dataset (i.e., each array).
+    average = np.mean(data_arrays, axis=0)
+
+    return average
+
+def cal_box_length(num, density=1.0):
+    """calculate the length of a cubic water box
+
+    Args:
+        num (int): the number of water molecules.
+        density (float, optional): the density of water, in g/cm^3. Defaults to 1.0.
+
+    Returns:
+        float: the length of a cubic water box, in Angstrom
+    """
+    mass_O=15.9994
+    mass_H=1.008
+    mass_water = mass_O+2*mass_H
+    box_length = (num*density/(1/mass_water*NA))**(1/3) * 1e8
+    print(f"The length of a cubic water box for {num} water molecules and {density} g/cm^3 is {box_length:.4f} Angstrom")
+    return box_length
+
+
+def create_dir(path, backup=True):
+    """Create a directory at the specified 'path'. If the directory already exists and 'backup' is True, rename the original directory by appending '.bkXXX'.
+
+    Args:
+        path (str): The path of the directory to be created.
+        backup (bool, optional): Whether to back up an existing directory. Default is ``True``.
+
+    Examples:
+        >>> import os
+        >>> import postmd.utils as utils
+        >>> 
+        >>> print(os.listdir())
+        ['createdir.py']
+        >>> utils.create_dir("test")
+        >>> print(os.listdir())      # create a new "test" dir
+        ['createdir.py', 'test']
+        >>> utils.create_dir("test") 
+        >>> print(os.listdir())      # move orgin "test" dir to "test.bk000" dir
+        ['createdir.py', 'test', 'test.bk000']
+        >>> utils.create_dir("test")
+        >>> print(os.listdir())      # move orgin "test" dir to "test.bk001" dir
+        ['createdir.py', 'test', 'test.bk000', 'test.bk001']
+
+    """
     path += "/"
     if os.path.isdir(path) and backup:
         dirname = os.path.dirname(path)
         counter = 0
         while True:
-            bk_dirname = dirname + ".bk%03d" % counter
+            bk_dirname = dirname + ".bk%03d" % counter # formatting .bkxxx
             if not os.path.isdir(bk_dirname):
                 shutil.move(dirname, bk_dirname)
                 break
@@ -39,22 +107,7 @@ def cum_ave(data):
     return np.cumsum(data)/np.arange(1,len(data)+1)
 
 
-def cal_box_length(num, density=1.0):
-    """calculate the length of a cubic water box
 
-    Args:
-        num (int): the number of water molecules.
-        density (float, optional): the density of water, in g/cm^3. Defaults to 1.0.
-
-    Returns:
-        float: the length of a cubic water box, in Angstrom
-    """
-    mass_O=15.9994
-    mass_H=1.008
-    mass_water = mass_O+2*mass_H
-    box_length = (num*density/(1/mass_water*NA))**(1/3) * 1e8
-    print(f"The length of a cubic water box for {num} water molecules and {density} g/cm^3 is {box_length:.4f} Angstrom")
-    return box_length
 
 
 def stat_bin(x,y, bins=10,range=None):
@@ -68,7 +121,7 @@ def stat_bin(x,y, bins=10,range=None):
         range ((float, float) or [(float, float)], optional): The lower and upper range of the bins. If not provided, range is simply (x.min(), x.max()). Values outside the range are ignored. Defaults to None.
 
     Returns:
-        _type_: _description_
+        tuple: (x_mean, x_std, y_mean, y_std)
     """    
     x_mean, _, _ = scipy.stats.binned_statistic(x, x, statistic='mean', bins=bins, range=range)
     x_std, _, _ = scipy.stats.binned_statistic(x, x, statistic='std', bins=bins, range=range)
@@ -78,7 +131,7 @@ def stat_bin(x,y, bins=10,range=None):
 
 
 def judge_file(path):
-    """judge whether the path of object is accessable.
+    """judge whether the path is a file.
     """
     path = os.path.abspath(path)
     if not Path(path).is_file():
@@ -86,8 +139,10 @@ def judge_file(path):
     
 
 def judge_dir(path):
-    """judge whether the path of object is accessable.
+    """judge whether the path is a folder.
     """
     path = os.path.abspath(path)
     if not Path(path).is_dir():
         raise ValueError(f"'{path}' is not a dir!") 
+    
+
