@@ -12,6 +12,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   postmd.animate
    postmd.avechunk
    postmd.avetime
    postmd.dump
