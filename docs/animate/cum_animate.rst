@@ -7,6 +7,7 @@ CumAnimate class
     :show-inheritance:
 
 Example:
+----------
 
 .. code-block:: python
 

@@ -1,5 +1,4 @@
-================
-GreenKubo
+GreenKubo class
 ================
 The Green-Kubo formula usually have the following form including an auto-correlation function(ACF) of a certain property,
 
@@ -13,13 +12,13 @@ For example, the Green-Kubo formula(vscf) for calculate the diffusion coefficien
 .. math::
     D=\frac{1}{3} \int_{0}^{\infty}\left\langle\mathbf{v}^{c}(t) \cdot \mathbf{v}^{c}(0)\right\rangle \mathrm{d} t
 
-**The calculation of ACF is central in the Green-Kubo formula**. Here we devide Green-Kubo data into two types: ``raw`` and ``acf``:
+**The calculation of ACF is central in the Green-Kubo formula**. We provided ``postmd.avetime.GreenKubo`` class to help to calculate ACF. Here we devide the generated data from LAMMPS into two types: ``raw`` and ``acf``:
 
 - ``raw``: just the property :math:`p`
 - ``acf``: ACF :math:`\left\langle p(0) \cdot p(t) \right\rangle`, usually generated from command ``fix ave/correlate type auto overwriting``, see `fix ave/correlate <https://docs.lammps.org/fix_ave_correlate.html>`_ command
 
 raw-type data
-=============
+---------------
 
 .. code-block:: python
     
@@ -57,7 +56,7 @@ raw-type data
     plt.legend()
 
 acf-type data
-=============
+-----------------
 
 .. code-block:: python
 

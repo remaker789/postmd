@@ -1,3 +1,3 @@
-from .MDData import MDFile
+from .system.mdfile import MDFile
 
 __all__ = ['MDFile']

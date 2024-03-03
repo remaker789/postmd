@@ -2,10 +2,10 @@ import os
 import shutil
 from pathlib import Path
 import numpy as np
-import scipy.constants as C
 import scipy
+import scipy.constants as C
 
-NA = C.Avogadro
+
 
 def average_replicates(data_arrays):
     """average the data from replicates.
@@ -39,8 +39,12 @@ def average_replicates(data_arrays):
 
     return average
 
-def cal_box_length(num, density=1.0):
-    """calculate the length of a cubic water box
+def cal_box_length(num, density=1.0, NA=None):
+    """calculate the length of a cubic water box.
+
+    Warning: 
+        The built-in Avogadro constant in LAMMPS (units real or metal) is 6.02214129e23, see lammps/src/update.cpp, they write "force->mv2d = 1.0 / 0.602214129" for units real and units metal. **However, we defalutly used the Avogadro constant in scipy.constants is 6.022140857e23, which is the international standard.**
+
 
     Args:
         num (int): the number of water molecules.
@@ -48,13 +52,20 @@ def cal_box_length(num, density=1.0):
 
     Returns:
         float: the length of a cubic water box, in Angstrom
+        
+    Examples:
+        >>> import postmd.utils as utils
+        >>> utils.cal_box_length(1000, density=1.0)
+        The length of a cubic water box for 1000 water molecules and 1.0 g/cm^3 is 31.043047 Angstrom
     """
+    if NA is None:
+        NA = C.Avogadro
+
     mass_O=15.9994
     mass_H=1.008
     mass_water = mass_O+2*mass_H
     box_length = (num*density/(1/mass_water*NA))**(1/3) * 1e8
-    print(f"The length of a cubic water box for {num} water molecules and {density} g/cm^3 is {box_length:.4f} Angstrom")
-    return box_length
+    print(f"The length of a cubic water box for {num} water molecules and {density} g/cm^3 is {box_length:.6f} Angstrom")
 
 
 def create_dir(path, backup=True):
@@ -94,14 +105,24 @@ def create_dir(path, backup=True):
     os.makedirs(path)
     
     
-def cum_ave(data):
-    """calculate the cumulative average
+def cumave(data):
+    """calculate the cumulative average.
 
     Args:
         data (1d list): the data need to do the cumulative average
 
     Returns:
         np.ndarray: the cumulative average
+    
+    Examples:
+        >>> import postmd.utils as utils
+        >>> import numpy as np
+        >>> array = np.arange(9)
+        >>> print(array)
+        [0 1 2 3 4 5 6 7 8]
+        >>> utils.cumave(array)
+        array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. ])
+            
     """    
     data = np.array(data)
     return np.cumsum(data)/np.arange(1,len(data)+1)
@@ -133,6 +154,7 @@ def stat_bin(x,y, bins=10,range=None):
 def judge_file(path):
     """judge whether the path is a file.
     """
+
     path = os.path.abspath(path)
     if not Path(path).is_file():
         raise ValueError(f"'{path}' is not a file!")  

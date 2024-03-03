@@ -19,11 +19,3 @@ Subpackages
    postmd.log
    postmd.system
    postmd.utils
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 4
-
-   postmd.MDData

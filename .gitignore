@@ -6,4 +6,4 @@
 **/*.egg-info
 # /docs/postmd*rst
 # /docs/modules.rst
-/.vscode/
+**/.vscode/

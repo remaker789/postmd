@@ -12,8 +12,8 @@ class GreenKubo(AveTime):
     Green-Kubo formula, because this script just do the integration of acf, not
     including other parts, like multiply or divide by some properties.
     """    
-    def __init__(self, T=298.0, timestep=1.0):
-        super().__init__(T, timestep)
+    def __init__(self, path=None, timestep:float=1.0):
+        super().__init__(path, timestep)
         self.acf=None
         self.nlag=None
         self.int_acf=None
