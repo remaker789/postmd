@@ -27,8 +27,8 @@ acf_data_path=r"./data/friction_acf_overwriting.txt"
 
 ## ================ For raw data ===================
 unit_trans = e/1e-10  # friction force的单位是eV/Ang
-mywork=GreenKubo()
-mywork.read_file(path=raw_data_path, name_line=2)
+mywork=GreenKubo(raw_data_path)
+mywork.read_file()
 mywork.cal_acf(data_type="raw",col=3,nlag=2000,unit_trans=unit_trans)
 plt.figure()
 plt.plot(mywork.nlag,mywork.acf)
@@ -36,6 +36,7 @@ plt.title("computed from raw data")
 plt.xlabel("nlag")
 plt.ylabel("acf")
 plt.legend()
+# plt.savefig("./output/green_kubo_raw_data_acf.png")
 
 
 A = 2*np.pi*2.335e-10*200e-10
@@ -51,14 +52,14 @@ plt.xlabel("nlag")
 plt.ylabel("integration of acf")
 plt.title("computed from raw data")
 plt.legend()
-
+# plt.savefig("./output/green_kubo_raw_data_int_acf.png")
 
 
 
 ## ================ For autocorrelation data ==================
 unit_trans = e/1e-10  # friction force的单位是eV/Ang
-mywork=GreenKubo()
-mywork.read_file(path=acf_data_path, name_line=3, skiprows=4)
+mywork=GreenKubo(path=acf_data_path)
+mywork.read_file(header_line=3, skiprows=4)
 mywork.cal_acf(data_type="acf",col=5,nlag_col=1,unit_trans=unit_trans)
 plt.figure()
 plt.plot(mywork.nlag,mywork.acf)
@@ -66,7 +67,7 @@ plt.title("computed from acf data")
 plt.xlabel("nlag")
 plt.ylabel("acf")
 plt.legend()
-
+# plt.savefig("./output/green_kubo_acf_data_acf.png")
 
 A = 2*np.pi*2.335e-10*200e-10
 kB = C.Boltzmann
@@ -81,6 +82,10 @@ plt.xlabel("nlag")
 plt.ylabel("integration of acf")
 plt.title("computed from acf data")
 plt.legend()
+# plt.savefig("./output/green_kubo_acf_data_int_acf.png")
+
+
+
 plt.show()
 
 

@@ -11,7 +11,6 @@ os.chdir(os.path.dirname(__file__))
 
 from postmd.avetime import AveTime
 
-test = AveTime()
-test.set_path(r"./data/ave_time.dat")
+test = AveTime(r"./data/ave_time.dat")
 df = test.read_file()
 print(df.head())

@@ -1,6 +1,11 @@
 postmd.log package
 ==================
 
+.. automodule:: postmd.log
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -16,14 +21,6 @@ postmd.log.logfile module
 -------------------------
 
 .. automodule:: postmd.log.logfile
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: postmd.log
    :members:
    :undoc-members:
    :show-inheritance:

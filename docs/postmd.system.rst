@@ -1,21 +1,18 @@
 postmd.system package
 =====================
 
-Submodules
-----------
-
-postmd.system.system module
----------------------------
-
-.. automodule:: postmd.system.system
+.. automodule:: postmd.system
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+Submodules
+----------
 
-.. automodule:: postmd.system
+postmd.system.mdfile module
+---------------------------
+
+.. automodule:: postmd.system.mdfile
    :members:
    :undoc-members:
    :show-inheritance:

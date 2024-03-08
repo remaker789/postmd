@@ -6,9 +6,21 @@
 Welcome to PostMD Documentation!
 ================================================
 
+
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: USER GUIDE
+   :numbered: 1
+   
+   install
+   usage
+
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: SOURCE CODE
 
    modules
 
