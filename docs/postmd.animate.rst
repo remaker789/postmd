@@ -9,9 +9,26 @@ postmd.animate package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.animate.animate module
+-----------------------------
 
-   postmd.animate.animate
-   postmd.animate.append_animate
-   postmd.animate.cum_animate
+.. automodule:: postmd.animate.animate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+postmd.animate.append\_animate module
+-------------------------------------
+
+.. automodule:: postmd.animate.append_animate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+postmd.animate.cum\_animate module
+----------------------------------
+
+.. automodule:: postmd.animate.cum_animate
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,5 +1,7 @@
+================
 GreenKubo class
 ================
+
 The Green-Kubo formula usually have the following form including an auto-correlation function(ACF) of a certain property,
 
 .. math::

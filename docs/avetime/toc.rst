@@ -1,3 +1,4 @@
+========================
 avetime package
 ========================
 
@@ -10,6 +11,7 @@ The ``GreenKubo`` class is to help calculate the auto-correlation function.
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
 
    avetime
    greenkubo

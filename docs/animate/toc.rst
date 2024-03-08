@@ -14,10 +14,11 @@ We provide two derived classes: ``AppendAnimate`` and ``CumAnimate``.
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
    
-
    cum_animate
    append_animate
+
 
 .. note::
    We have initialized ``self.fig, self.ax = plt.subplots()`` in the base class ``Animate``.

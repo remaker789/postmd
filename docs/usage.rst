@@ -1,4 +1,4 @@
-2. Usage
+Usage
 ==============
 
 .. toctree::

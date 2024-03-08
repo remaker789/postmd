@@ -1,5 +1,7 @@
 # sphinx-apidoc -M -e -f -t docs/_templates/apidoc  -o docs .
-sphinx-apidoc -M -e -f  -o docs .
+# sphinx-apidoc -M -e -f  -o docs .
+sphinx-apidoc -M -f  -o docs .
+
 
 # -e, --separate: Put documentation for each module on its own page.
 # -T, --no-toc: Do not create a table of contents file. Ignored when --full is provided.

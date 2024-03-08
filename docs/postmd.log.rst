@@ -9,8 +9,18 @@ postmd.log package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.log.dir module
+---------------------
 
-   postmd.log.dir
-   postmd.log.logfile
+.. automodule:: postmd.log.dir
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+postmd.log.logfile module
+-------------------------
+
+.. automodule:: postmd.log.logfile
+   :members:
+   :undoc-members:
+   :show-inheritance:

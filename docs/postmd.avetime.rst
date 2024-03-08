@@ -9,8 +9,18 @@ postmd.avetime package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.avetime.avetime module
+-----------------------------
 
-   postmd.avetime.avetime
-   postmd.avetime.greenkubo
+.. automodule:: postmd.avetime.avetime
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+postmd.avetime.greenkubo module
+-------------------------------
+
+.. automodule:: postmd.avetime.greenkubo
+   :members:
+   :undoc-members:
+   :show-inheritance:

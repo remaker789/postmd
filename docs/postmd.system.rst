@@ -9,7 +9,10 @@ postmd.system package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.system.mdfile module
+---------------------------
 
-   postmd.system.mdfile
+.. automodule:: postmd.system.mdfile
+   :members:
+   :undoc-members:
+   :show-inheritance:

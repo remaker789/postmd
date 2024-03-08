@@ -9,7 +9,10 @@ postmd.avechunk package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.avechunk.bin1d module
+----------------------------
 
-   postmd.avechunk.bin1d
+.. automodule:: postmd.avechunk.bin1d
+   :members:
+   :undoc-members:
+   :show-inheritance:

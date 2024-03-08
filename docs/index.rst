@@ -10,8 +10,9 @@ Welcome to PostMD Documentation!
 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: USER GUIDE
+   :numbered: 1
    
    install
    usage

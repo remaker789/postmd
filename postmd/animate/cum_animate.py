@@ -3,23 +3,21 @@ from .animate import Animate
 
 
 class CumAnimate(Animate):
-    def __init__(self, *args, mode: str = None, fps: int = 20, dpi: int = 72, range_mode: str = 'auto'):
+    def __init__(self, *args, fps:int=20, dpi:int=72, range_mode:str='auto', mode:str='mean'):
         """The cumulative animation of a set of data, which is usually for show the change of data with number of experiments or cumulative average.
 
         Args:
             *args: a set of y data ``(ydata1, ydata2, ...)``, or ``x, (ydata1, ydata2, ...)``. Each `ydata` should be a 1D array.
-            mode (str, optional): ``None``, ``"sum"`` or ``"mean"``. Defaults to `None`.
-
-                - If ``mode=None``, ``ydata1``, ``ydata2``, ... will display in order as animation
-                - If ``mode="sum"``, the cumulative summation of ``(ydata1, ydata2, ...)`` will display in order as animation. The n-th frame is ``ydata1+ydata2+...+ydatan``
-                - If ``mode="mean"``, the cumulative average of ``(ydata1, ydata2, ...)`` will display in order as animation. The n-th frame is ``(ydata1+ydata2+...+ydatan)/n``
-
             fps (int, optional): Frames per second (FPS) setting for animation. Defaults to ``20``.
             dpi (int, optional): Dots per inch (DPI) resolution for animation. Defaults to ``72``.
             range_mode (str, optional): Determines the behavior of x and y limits in the animation. Defaults to ``'auto'``.
-
                 - If set to ``'auto'``, the x and y limits will automatically adjust to the data range.
                 - If set to ``'fix'``, the x and y limits will be fixed to a specific range. The fixed range is from the min to max of data plus 5% margin.
+            mode (str, optional): ``"mean"``, ``"sum"`` or ``"mean"``. Defaults to `None`.
+                - If ``mode="mean"``, the cumulative average of ``(ydata1, ydata2, ...)`` will display in order as animation. The n-th frame is ``(ydata1+ydata2+...+ydatan)/n``
+                - If ``mode="sum"``, the cumulative summation of ``(ydata1, ydata2, ...)`` will display in order as animation. The n-th frame is ``ydata1+ydata2+...+ydatan``
+                - If ``mode="sequence"``, ``ydata1``, ``ydata2``, ... will display in sequence as animation
+                
 
         """
         super().__init__(*args, fps=fps, dpi=dpi)
@@ -31,7 +29,7 @@ class CumAnimate(Animate):
 
 
     def _post_process(self):
-        if self.mode is None:
+        if self.mode == "sequence":
             self.ydata = self.y
         elif self.mode == 'sum':
             self.ydata = np.cumsum(self.y, axis=0)

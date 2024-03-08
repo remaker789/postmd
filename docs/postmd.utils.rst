@@ -9,7 +9,10 @@ postmd.utils package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+postmd.utils.utils module
+-------------------------
 
-   postmd.utils.utils
+.. automodule:: postmd.utils.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

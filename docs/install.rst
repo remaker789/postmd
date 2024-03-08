@@ -1,4 +1,4 @@
-1. Installation
+Installation
 =================
 
 Install stable version of ``postmd`` package from ``PyPI``:
