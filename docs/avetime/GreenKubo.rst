@@ -34,7 +34,7 @@ raw-type data
     unit_trans = e/1e-10  # eV/Ang to N
     gk=GreenKubo()
     gk.read_file(path=raw_data_path, name_line=2)
-    gk.cal_acf(data_type="raw",col=3,nlag=2000,unit_trans=unit_trans)
+    gk.calc_acf(data_type="raw",col=3,nlag=2000,unit_trans=unit_trans)
     plt.figure()
     plt.plot(gk.nlag,gk.acf)
     plt.title("computed from raw data")
@@ -72,7 +72,7 @@ acf-type data
     unit_trans = e/1e-10  # friction force的单位是eV/Ang
     gk=GreenKubo()
     gk.read_file(path=acf_data_path, name_line=3, skiprows=4)
-    gk.cal_acf(data_type="acf",col=5,nlag_col=1,unit_trans=unit_trans)
+    gk.calc_acf(data_type="acf",col=5,nlag_col=1,unit_trans=unit_trans)
     plt.figure()
     plt.plot(gk.nlag,gk.acf)
     plt.title("computed from acf data")

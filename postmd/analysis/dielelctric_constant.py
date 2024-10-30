@@ -23,7 +23,7 @@ class DielectricHomo(AveTime):
 
     def run(self,
             volumn=None,
-            cal_dim="xyz",
+            calc_dim="xyz",
             dim_map=None,
             unit_trans=1.0,
             ):
@@ -34,7 +34,7 @@ class DielectricHomo(AveTime):
         # 准确来说，并不需要输出c_mydipole，只需要c_mydipole[*]即可
         # compute dipole实际使用的unwrapped coords计算的dipole!
         df = self.read_file()
-        cols = mapdim2col(dim_map, cal_dim)
+        cols = mapdim2col(dim_map, calc_dim)
         M2_s = np.zeros(len(cols))
         M_s = np.zeros(len(cols))
         for i, col in enumerate(cols):
@@ -65,7 +65,7 @@ class DielectricHomo(AveTime):
         #     'eps': eps_s,
         #     'eps_mean': np.mean(eps_s)
         # }
-        print("The sequence of results is as the parameter 'cal_dim'. For 'yxz', the elements of array is y,x,z")
+        print("The sequence of results is as the parameter 'calc_dim'. For 'yxz', the elements of array is y,x,z")
         print(self.results)
 
 

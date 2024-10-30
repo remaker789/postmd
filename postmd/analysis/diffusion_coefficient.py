@@ -103,9 +103,9 @@ class MSD(AveTime):
              data_type="dump",
              interval:int=None, 
              start:int=0, step:int=1, stop:int=None, 
-             select="all", cal_dim="xyz",fft=True):
-        self.dim=len(cal_dim) # dimension of diffusion coefficient
-        self.msd_type = cal_dim
+             select="all", calc_dim="xyz",fft=True):
+        self.dim=len(calc_dim) # dimension of diffusion coefficient
+        self.msd_type = calc_dim
         if data_type == "dump":
             if interval is None:
                 raise ValueError("Please specify the interval frames between neighboring frames")
@@ -124,7 +124,7 @@ class MSD(AveTime):
             u = mda.Universe(self.path,format="LAMMPSDUMP",dt=interval_time*1.e-3, lammps_coordinate_convention="auto",unwrap_images=True) # dt in ps
             
             # run MSD analysis
-            _msd = msd.EinsteinMSD(u, select=select, msd_type=cal_dim,fft=fft)
+            _msd = msd.EinsteinMSD(u, select=select, msd_type=calc_dim,fft=fft)
             
             _msd.run(start=start, step=step, stop=stop, verbose=True) # step means the interval of frames
             
@@ -149,22 +149,22 @@ class MSD(AveTime):
             
             self.nframe = len(_msd.data)
             self.nlag = _msd.data["TimeStep"]*self.timestep # in fs
-            if cal_dim == "x":
+            if calc_dim == "x":
                 self.msd = _msd.data.iloc[:,1] # in Ang^2
-            elif cal_dim == "y":
+            elif calc_dim == "y":
                 self.msd = _msd.data.iloc[:,2] # in Ang^2
-            elif cal_dim == "z":
+            elif calc_dim == "z":
                 self.msd = _msd.data.iloc[:,3] # in Ang^2
-            elif cal_dim == "xy" or cal_dim == "yx":
+            elif calc_dim == "xy" or calc_dim == "yx":
                 self.msd = _msd.data.iloc[:,1]+_msd.data.iloc[:,2] # in Ang^2
-            elif cal_dim == "xz" or cal_dim == "zx":
+            elif calc_dim == "xz" or calc_dim == "zx":
                 self.msd = _msd.data.iloc[:,1]+_msd.data.iloc[:,3] # in Ang^2
-            elif cal_dim == "yz" or cal_dim == "zy":
+            elif calc_dim == "yz" or calc_dim == "zy":
                 self.msd = _msd.data.iloc[:,2]+_msd.data.iloc[:,3] # in Ang^2
-            elif cal_dim == "xyz":
+            elif calc_dim == "xyz":
                 self.msd = _msd.data.iloc[:,4] # in Ang^2
             else:
-                raise ValueError(f"the msd_type '{cal_dim}' is not supported! Please use 'x', 'y', 'z', 'xy', 'yx', 'xz', 'zx', 'yz', 'zy', 'xyz' instead.")
+                raise ValueError(f"the msd_type '{calc_dim}' is not supported! Please use 'x', 'y', 'z', 'xy', 'yx', 'xz', 'zx', 'yz', 'zy', 'xyz' instead.")
                 
         
         else: 
