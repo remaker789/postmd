@@ -7,3 +7,5 @@
 # /docs/postmd*rst
 # /docs/modules.rst
 **/.vscode/
+**/line_counts/
+tach*

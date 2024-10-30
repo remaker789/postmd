@@ -38,7 +38,7 @@ class LogFile:
         judge_file(self.path)   
         with open(self.path, encoding='utf-8') as f:
             self.lammps_version = f.readline()
-            print(f"The version of LAMMPS: {self.lammps_version}")
+            print(f"LAMMPS version: {self.lammps_version}")
     
 
     def extract_thermodata(self,*, block_start = "Per MPI rank", block_end = "Loop time of", path=None, output="extracted-log.lammps"):        

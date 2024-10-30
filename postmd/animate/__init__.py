@@ -1,6 +1,4 @@
-from .append_animate import AppendAnimate
-from .cum_animate import CumAnimate
-# from .animate import Animate
+from .animate import CumAnimate,AppendAnimate
 
 
 __all__ = [

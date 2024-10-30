@@ -1,6 +1,6 @@
 # after build the docs, run this powershell script.
 Remove-Item -Path "html/*" -Recurse
-Remove-Item -Path "../postmd-manual/*" -Recurse
+Remove-Item -Path "../postmd-manual/*" -Recurse -Exclude "../postmd-manual/.git"
 
 sphinx-multiversion.exe docs html
 
