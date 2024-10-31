@@ -1,8 +1,8 @@
-animate package
+animate module
 ================
 
 
-We built ``postmd.animate`` subpackage to help to animate the data. This subpackage 
+We built ``postmd.animate`` module to help to animate the data. This module 
 is based on the ``matplotlib.animation.FuncAnimation`` class. 
 
 We provided two methods to preview and save the animation.
