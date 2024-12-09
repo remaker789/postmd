@@ -6,12 +6,17 @@ from ..utils import mapdim2col
 from .base import Results
 
 class ShearViscosity(GreenKubo):
-    """The shear viscosity is calculated by Green-Kubo formula,
+    r"""
+    The shear viscosity is calculated by Green-Kubo formula,
+    
     .. math::
     
-        \eta = \frac { V } { k _ { B } T } \int _ { 0 } ^ { \infty } d t \langle \tau _ { \alpha \beta } ( t ) \tau _ { \alpha \beta } ( 0 ) \rangle _ { t _ { 0 } }
+        \eta =\frac { V } { k _ { B } T } \int _ { 0 } ^ { \infty } d t \langle \tau _ { \alpha \beta } ( t ) \tau _ { \alpha \beta } ( 0 ) \rangle _ { t _ { 0 } }
+        
+    $E=mc^2$
     
-    where :math:`V` is the volume of the system, :math:`k _ { B }` is the Boltzmann constant, :math:`T` is the temperature, and :math:`\tau _ { \alpha \beta }` is the off-diagonal(or traceless) components of stress tensor.
+    
+    where :math:`V` is the volume of the system, :math:`k _ \mathrm{B}` is the Boltzmann constant, :math:`T` is the temperature, and :math:`\tau_{ \alpha \beta }` is the off-diagonal(or traceless) components of stress tensor.
     """    
     # 2024-06-22 zss 剪切粘度计算需要分别计算xy,yz,xz方向，然后求和平均得到整体平均值。
   

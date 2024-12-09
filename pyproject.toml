@@ -1,3 +1,66 @@
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "postmd"
+version = "0.1.2"
+description = "postmd: A simple package for post-processing of data from LAMMPS"
+authors = [
+  {name = "Shusong Zhang", email = "zhangshusong789@gmail.com"},
+]
+license = {file = "LICENSE"}
+readme = "README.md"
+
+classifiers = [
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    'numpy >= 1.22.0',
+    'pandas >= 1.4.0',
+    'matplotlib >= 3.6.0',
+    'scipy >= 1.9.0',
+    'MDAnalysis >= 2.7.0',
+]
+requires-python = ">=3.8"
+# keywords = ["post-processing", "LAMMPS"]
+
+
+[project.urls]
+Homepage = "https://remaker789.github.io/"
+documentation = "https://remaker789.github.io/postmd-manual/main/"
+repository = "https://github.com/remaker789/postmd"
+
+[project.scripts]
+lmp-snippets = "postmd.scripts.lmp_snippets:main"
+plumed-snippets = "postmd.scripts.plumed_snippets:main"
+cp2k-snippets = "postmd.scripts.cp2k_snippets:main"
+
+
+[tool.setuptools]
+# ...
+# By default, include-package-data is true in pyproject.toml,
+# so you do NOT have to specify this line.
+include-package-data = true
+
+
+
+[tool.setuptools.packages.find]
+# where = ["postmd"] # ["."] by default
+where = ["."] # ["."] by default
+# include = ["mypackage*"]  # ["*"] by default
+# exclude = ["mypackage.tests*"]  # empty by default
+# namespaces = false  # true by default
+
+[tool.setuptools.package-data]
+dump = ["*.sh"]
+
+
+# [tool.setuptools_scm]
+# write_to = "dpgen/_version.py"
+
+# [tool.ruff.pydocstyle]
+# convention = "numpy"
