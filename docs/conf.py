@@ -9,12 +9,12 @@
 import os
 import sys
 
-sys.path.insert(0,os.path.abspath(".."))  # must be .., ".." dir is D:\OneDrive\Github\MyRepos\PostMD
+# sys.path.insert(0,os.path.abspath(".."))  # must be .., ".." dir is D:\OneDrive\Github\MyRepos\PostMD
 
 
 
 
-project = 'PostMD Documentation'
+project = 'postmd Documentation'
 copyright = '2024, Shusong Zhang'
 author = 'Shusong Zhang'
 release = '0.1.0'
@@ -30,7 +30,48 @@ extensions = [
     "sphinx.ext.napoleon", # Google style docstring
     "sphinx_multiversion",
     "sphinx_copybutton",   # add copy button to code block
+    "myst_parser",         # markdown parser
+    # "autodoc2",
+    "autoapi.extension"
 ]
+
+autoapi_dirs = ['../postmd']
+def skip_submodules(app, what, name, obj, skip, options):
+    if what == "module":
+        skip = True
+    return skip
+
+
+def setup(sphinx):
+    sphinx.connect("autoapi-skip-member", skip_submodules)
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
+# myst_parser configuration
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    # "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]
+
+
+# autodoc2_module_all_regexes = [
+#     r"postmd\..*",
+# ]
 
 templates_path = ['_templates']
 html_sidebars = {
@@ -38,6 +79,7 @@ html_sidebars = {
         'versioning.html',
     ],
 }
+
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
