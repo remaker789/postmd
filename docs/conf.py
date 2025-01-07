@@ -25,16 +25,18 @@ release = '0.1.0'
 extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
-    "sphinx.ext.autodoc",
+    # "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon", # Google style docstring
     "sphinx_multiversion",
     "sphinx_copybutton",   # add copy button to code block
     "myst_parser",         # markdown parser
     # "autodoc2",
-    "autoapi.extension"
+    "autoapi.extension",
+    "sphinx_rtd_theme",
 ]
 
+# autoapi configuration
 autoapi_dirs = ['../postmd']
 def skip_submodules(app, what, name, obj, skip, options):
     if what == "module":
@@ -45,12 +47,13 @@ def skip_submodules(app, what, name, obj, skip, options):
 def setup(sphinx):
     sphinx.connect("autoapi-skip-member", skip_submodules)
 
+
+# myst_parser configuration
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
 }
 
-# myst_parser configuration
 myst_enable_extensions = [
     "amsmath",
     "attrs_inline",
@@ -87,18 +90,19 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
+# rtd 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 
-autodoc_default_options = {
-    'members': True,
-    'member-order': 'bysource',
-    # 'special-members': '__init__',
-    'undoc-members': True,
-    'exclude-members': '__weakref__',
-    # 'private-members': True, # open the docstring of _xxx method
-}
+# autodoc_default_options = {
+#     'members': True,
+#     'member-order': 'bysource',
+#     # 'special-members': '__init__',
+#     'undoc-members': True,
+#     'exclude-members': '__weakref__',
+#     # 'private-members': True, # open the docstring of _xxx method
+# }
 
 
 autosummary_generate = True
@@ -110,7 +114,7 @@ add_module_names = True
 autoclass_content = "both"
 
 # This value controls the docstrings inheritance. If set to True the docstring for classes or methods, if not explicitly set, is inherited from parents.
-autodoc_inherit_docstrings = True
+# autodoc_inherit_docstrings = True
 
 
 
