@@ -288,19 +288,19 @@ def _next_regular(target):
     return match
 
    
-def calc_acf(data, nlag=None, fft=False):
+def calc_acf(data, nlag:int, fft:bool=False):
     """calculate the auto-correlation function in the Green-Kubo formula
 
     Args:
-        data (_type_): _description_
-        nlag (_type_, optional): _description_. Defaults to None.
+        data (list or np.array): 1d array of data
+        nlag (int): number of time lag
+        fft (bool, optional): whether to use FFT or not according to Wiener-Khinchin theorem. Defaults to False.
 
     Returns:
-        _type_: _description_
+        np.array: auto-correlation functionc for data
     """    
     print("Begin calculate the auto-correlation function in the Green-Kubo formula")
     
-    # forked from acovf function of statsmodels package
     data = np.array(data,dtype=np.float64)
     n = len(data)
     if fft is False:
