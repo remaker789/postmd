@@ -9,3 +9,4 @@
 **/.vscode/
 **/line_counts/
 tach*
+tests/data/dump.xyz

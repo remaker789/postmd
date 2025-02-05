@@ -17,6 +17,7 @@ Welcome to postmd Documentation!
    install
    usage
    misc
+   cli/index
 
 .. toctree::
    :maxdepth: 1

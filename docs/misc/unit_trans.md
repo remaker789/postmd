@@ -2,6 +2,8 @@
 
 **All values of Fundamental Physical Constants are from [CODATA](https://physics.nist.gov/cuu/Constants/) 2022**
 
+A useful online unit calculator is shown [here](https://jerkwin.github.io/gmxtools/calc/calc.html).
+
 ## Electric
 
 $$
@@ -13,6 +15,7 @@ $$
 $$
 
 Note: the values of vacuum permittivity in CODATA 2018 and 2022 are different.
+
 $$
 \mathrm{elementary \ charge}: \quad 1 \, e = 1.602176634\times 10^{-19} \, \mathrm{C}
 $$
@@ -70,8 +73,6 @@ $$
 $$
 \mathrm{proton-electron\ mass \ ratio:} \quad m_\mathrm{p}/m_\mathrm{e}=1836.152 673 426(32)
 $$
-
-
 
 ## Length
 

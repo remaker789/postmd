@@ -35,9 +35,7 @@ documentation = "https://remaker789.github.io/postmd-manual/main/"
 repository = "https://github.com/remaker789/postmd"
 
 [project.scripts]
-lmp-snippets = "postmd.scripts.lmp_snippets:main"
-plumed-snippets = "postmd.scripts.plumed_snippets:main"
-cp2k-snippets = "postmd.scripts.cp2k_snippets:main"
+postmd = "postmd.scripts.postmd:main"
 
 
 [tool.setuptools]
