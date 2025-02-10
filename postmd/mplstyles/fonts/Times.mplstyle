@@ -1,4 +1,4 @@
-# 2022/09/21
+# 2025-02-05
 # made by Shusong Zhang, NWPU
 # This file used 'Times New Roman' as the default font.
 # For math mode(the contents between $$), this file does not use latex!
@@ -25,45 +25,45 @@ figure.figsize:     8.0, 6.0  # figure size in inches
 
 font.size:    20.0
 font.family:  serif
-font.serif:      Times New Roman
+font.serif:   Times New Roman, Times
 
 
 ## LINES
-lines.linewidth: 3.0            # line width in points
-lines.markersize:  10.0           # marker size, in points
+lines.linewidth: 2.0            # line width in points
+lines.markersize:  6.0           # marker size, in points
+lines.markeredgewidth: 1.5
 
 
 ## AXES
 axes.linewidth: 1
-axes.titlesize: x-large
-axes.labelsize: x-large
+axes.titlesize: medium
+axes.labelsize: medium
 
 ## TICKS
-xtick.major.size:    5.0     # major tick size in points
-xtick.minor.size:    3.0       # minor tick size in points
-xtick.major.width:   0.8     # major tick width in points
-xtick.minor.width:   0.6     # minor tick width in points
+xtick.major.size:    6     # major tick size in points
+xtick.minor.size:    3     # minor tick size in points
+xtick.major.width:   1     # major tick width in points
+xtick.minor.width:   1     # minor tick width in points
 #xtick.major.pad:     3.5     # distance to major tick label in points
 #xtick.minor.pad:     3.4     # distance to the minor tick label in points
 
 xtick.labelsize:     medium  # font size of the tick labels
-xtick.direction:     out     # direction: {in, out, inout}
-xtick.minor.visible: False   # visibility of minor ticks on x-axis
-xtick.top: False
+xtick.direction:     in     # direction: {in, out, inout}
+xtick.minor.visible: True   # visibility of minor ticks on x-axis
+xtick.top: True
 
 
-
-ytick.major.size:    5.0    # major tick size in points
-ytick.minor.size:    3.0     # minor tick size in points
-ytick.major.width:   0.8     # major tick width in points
-ytick.minor.width:   0.6     # minor tick width in points
+ytick.major.size:    6    # major tick size in points
+ytick.minor.size:    3    # minor tick size in points
+ytick.major.width:   1    # major tick width in points
+ytick.minor.width:   1    # minor tick width in points
 #ytick.major.pad:     3.5     # distance to major tick label in points
 #ytick.minor.pad:     3.4     # distance to the minor tick label in points
 
-ytick.labelsize:     medium  # font size of the tick labels
-ytick.direction:     out     # direction: {in, out, inout}
-ytick.minor.visible: False   # visibility of minor ticks on y-axis
-ytick.right: False
+ytick.labelsize:     medium # font size of the tick labels
+ytick.direction:     in     # direction: {in, out, inout}
+ytick.minor.visible: True   # visibility of minor ticks on y-axis
+ytick.right: True
 
 ## ***************************************************************************
 ## * LEGEND                                                                  *
@@ -74,7 +74,7 @@ legend.frameon:       False     # if True, draw the legend on a background patch
 
 #legend.markerscale:   1.0      # the relative size of legend markers vs. original
 legend.fontsize:      medium
-
+legend.title_fontsize : 16
 
 ## Dimensions as fraction of font size:
 #legend.borderpad:     0.4  # border whitespace
@@ -91,7 +91,7 @@ legend.columnspacing: 1.0  # column separation
 
 grid.color: grey
 grid.linestyle: -    # solid line
-
+grid.linewidth : 1
 
 
 ## ***************************************************************************
@@ -109,6 +109,9 @@ mathtext.sf:  serif
 mathtext.tt:  monospace
 
 
+
+
+
 ## ***************************************************************************
 ## * SCATTER PLOTS                                                           *
 ## ***************************************************************************
@@ -120,7 +123,9 @@ mathtext.tt:  monospace
 ## ***************************************************************************
 ## * ERRORBAR PLOTS                                                          *
 ## ***************************************************************************
-errorbar.capsize: 10.0  # length of end cap on error bars in pixels
+# errorbar.capsize: 5.0  # length of end cap on error bars in pixels
+# errorbar.capthick: 0.7
+# errorbar.elinewidth: 1.0
 
 
 
@@ -133,7 +138,7 @@ errorbar.capsize: 10.0  # length of end cap on error bars in pixels
 ## The default savefig parameters can be different from the display parameters
 ## e.g., you may want a higher resolution, or to make the figure
 ## background white
-savefig.dpi:       1200      # figure dots per inch or 'figure'
+savefig.dpi:       600      # figure dots per inch or 'figure'
 savefig.format:    pdf         # {png, ps, pdf, svg}
 savefig.bbox:      tight
 savefig.transparent: False     # setting that controls whether figures are saved with a
@@ -142,6 +147,4 @@ savefig.transparent: False     # setting that controls whether figures are saved
 pdf.fonttype:      42       # Output Type 3 (Type3) or Type 42 (TrueType)
 
 ps.fonttype:       42       # Output Type 3 (Type3) or Type 42 (TrueType)
-
-
 

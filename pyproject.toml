@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "postmd"
-version = "0.1.2"
+version = "0.1.3"
 description = "postmd: A simple package for post-processing of data from LAMMPS"
 authors = [
   {name = "Shusong Zhang", email = "zhangshusong789@gmail.com"},
@@ -35,9 +35,7 @@ documentation = "https://remaker789.github.io/postmd-manual/main/"
 repository = "https://github.com/remaker789/postmd"
 
 [project.scripts]
-lmp-snippets = "postmd.scripts.lmp_snippets:main"
-plumed-snippets = "postmd.scripts.plumed_snippets:main"
-cp2k-snippets = "postmd.scripts.cp2k_snippets:main"
+postmd = "postmd.scripts.postmd:main"
 
 
 [tool.setuptools]

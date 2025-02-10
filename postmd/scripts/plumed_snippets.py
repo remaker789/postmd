@@ -1,5 +1,5 @@
-import argparse
-
+#!/usr/bin/env python
+"""PLUMED snippets for molecular dynamics simulations."""
 
 def pre_us():
     print("""
@@ -184,66 +184,47 @@ plumed driver --plumed <plumed.dat> --ixyz <trajectory.xyz> --trajectory-stride 
 # TIMESTEP: default in ps, 0.001 as 1 fs.
 """)   
 
-def main_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="""
-    plumed-snippets is a convenient script that show the input and post-processing 
-    snippets of PLUMED."""
-    )
-
-    parser.add_argument(
-        "--pre", type=str, default="all", help="print the pre-processing snippets of PLUMED."
-    )
+def handle_pre(option):
+    """Handle pre-processing snippets"""
+    handlers = {
+        "us": pre_us,
+        "metad": pre_metad,
+        "well-tempered metad": pre_metad,
+        "well-tempered metadynamics": pre_metad,
+        "metadynamics": pre_metad
+    }
     
-    parser.add_argument(
-        "--post", type=str, default="all", help="print the post-processing snippets of PLUMED."
-    )
+    if option.lower() == "all":
+        for func in handlers.values():
+            func()
+            print("\n" + "="*50 + "\n")
+    else:
+        handler = handlers.get(option.lower())
+        if handler:
+            handler()
+        else:
+            print(f"Unknown option: {option}")
+            print(f"Available options: {', '.join(handlers.keys())}")
+
+def handle_post(option):
+    """Handle post-processing snippets"""
+    handlers = {
+        "us": post_us,
+        "metad": post_metad,
+        "well-tempered metad": post_metad,
+        "well-tempered metadynamics": post_metad,
+        "metadynamics": post_metad,
+        "driver": post_driver
+    }
     
-    return parser
-    
-
-def main():
-    # print("Description\n------------")
-    parser = main_parser()
-    # try:
-    #     import argcomplete
-
-    #     argcomplete.autocomplete(parser)
-    # except ImportError:
-    #     # argcomplete not present.
-    #     pass
-
-    args = parser.parse_args()
-
-    # try:
-    #     getattr(args, "func")
-    # except AttributeError:
-    #     parser.print_help()
-    #     sys.exit(0)
-    # args.func(args)
-
-    if args.pre.lower() == "all":
-        pass
-        # 动态地调用所有以'pre'开头的函数
-        # for func_name, func in pre_functions.items():
-        #     func()
-    elif args.pre.lower() in ["us", "umbrella sampling"]:
-        pre_us()
-    elif args.pre.lower() in ["metad", "metadynamics", "well-tempered metad", "well-tempered metadynamics"]:
-        pre_metad()
-    
-    if args.post.lower() == "all":
-        pass
-        # 动态地调用所有以'pre'开头的函数
-        # for func_name, func in pre_functions.items():
-        #     func()
-    elif args.post.lower() in ["us", "umbrella sampling"]:
-        post_us()
-    elif args.post.lower() in ["metad", "metadynamics", "well-tempered metad", "well-tempered metadynamics"]:
-        post_metad()
-    elif args.post.lower() == "driver":
-        post_driver()
-
-
-if __name__ == "__main__":
-    main()
+    if option.lower() == "all":
+        for func in handlers.values():
+            func()
+            print("\n" + "="*50 + "\n")
+    else:
+        handler = handlers.get(option.lower())
+        if handler:
+            handler()
+        else:
+            print(f"Unknown option: {option}")
+            print(f"Available options: {', '.join(handlers.keys())}")

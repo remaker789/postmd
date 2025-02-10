@@ -7,4 +7,3 @@ Miscellaneous
    misc/unit_trans.md
    misc/atomic_units.md
 
-   
