@@ -1,22 +1,8 @@
 #!/usr/bin/env python
-"""
-Extract specific elements from XYZ file while preserving XYZ format.
-For Windows systems.
+"""Extract specific elements from XYZ file while preserving XYZ format."""
 
-Usage:
-    python extract_xyz.py -i input.xyz -e "Na K" [-o output.xyz]
-"""
-
-import argparse
 import os
 import sys
-
-def parse_args():
-    parser = argparse.ArgumentParser(description='Extract specific elements from XYZ file')
-    parser.add_argument('-i', '--input', required=True, help='Input XYZ file')
-    parser.add_argument('-e', '--elements', required=True, help='Space-separated list of elements to extract')
-    parser.add_argument('-o', '--output', help='Output XYZ file (optional)')
-    return parser.parse_args()
 
 def generate_output_name(input_file, elements):
     """Generate default output filename from input filename and elements"""
@@ -25,9 +11,23 @@ def generate_output_name(input_file, elements):
     return f"{base}_{elements_str}{ext}"
 
 def extract_xyz(input_file, elements, output_file=None):
-    """Extract specified elements from XYZ file"""
+    """
+    Extract specified elements from XYZ file.
+    
+    Parameters
+    ----------
+    input_file : str
+        Path to input XYZ file
+    elements : str
+        Space-separated list of elements to extract
+    output_file : str, optional
+        Path to output XYZ file. If not provided, will generate automatically.
+    """
     if output_file is None:
         output_file = generate_output_name(input_file, elements)
+    
+    if not os.path.isfile(input_file):
+        raise FileNotFoundError(f"Input file '{input_file}' does not exist.")
     
     elements = set(elements.split())
     
@@ -63,18 +63,4 @@ def extract_xyz(input_file, elements, output_file=None):
         print(f"Extracted XYZ file has been saved to {output_file}")
         
     except IOError as e:
-        print(f"Error processing files: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-
-def main():
-    args = parse_args()
-    
-    # Check if input file exists
-    if not os.path.isfile(args.input):
-        print(f"Error: Input file '{args.input}' does not exist.", file=sys.stderr)
-        sys.exit(1)
-    
-    extract_xyz(args.input, args.elements, args.output)
-
-if __name__ == "__main__":
-    main() 
+        raise IOError(f"Error processing files: {str(e)}") 
